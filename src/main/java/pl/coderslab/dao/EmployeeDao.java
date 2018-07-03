@@ -24,5 +24,14 @@ public class EmployeeDao {
         DBService.executeUpdate(databaseName, query, queryParams);
     }
 
+    public static void deleteEmployee(Employee employee) {
+        String query = "DELETE FROM employee WHERE id=?";
+
+        List<String> queryParams = new ArrayList<>();
+        queryParams.add(String.valueOf(employee.getId()));
+        DBService.executeUpdate(databaseName, query, queryParams);
+
+    }
+
 
 }

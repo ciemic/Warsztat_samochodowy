@@ -3,6 +3,9 @@ package pl.coderslab.dao;
 import pl.coderslab.model.Employee;
 import pl.coderslab.services.DBService;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,11 +56,33 @@ public class EmployeeDao {
 
     }
 
-    public static void loadAllEmployees(Employee employee) {
+    public static List<Employee> loadAllEmployees(Employee employee) {
+        List<Employee> employees = new ArrayList<>();
+        String query = "Select * FROM employees";
 
-        String query = "Select * from employees";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = DBService.connect(databaseName).prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Employee loadedEmployee = new Employee();
+                loadedEmployee.setId(resultSet.getInt("id"));
+                loadedEmployee.setName(resultSet.getString("name"));
+                loadedEmployee.setSurname(resultSet.getString("surname"));
+                loadedEmployee.setAddress(resultSet.getString("address"));
+                loadedEmployee.setPhone(resultSet.getString("phone"));
+                loadedEmployee.setNote(resultSet.getString("note"));
+                loadedEmployee.setHourly(resultSet.getBigDecimal("hourly"));
+                loadedEmployee.setEmail(resultSet.getString("email"));
+                loadedEmployee.setBirthDate(resultSet.getString("birth_date"));
 
+                employees.add(loadedEmployee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        return employees;
     }
 
 }

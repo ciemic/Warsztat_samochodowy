@@ -1,13 +1,14 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.model.Employee;
+import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class EmployeeDao {
     private static String databaseName = "car_service";
@@ -73,7 +74,7 @@ public class EmployeeDao {
                 loadedEmployee.setAddress(resultSet.getString("address"));
                 loadedEmployee.setPhone(resultSet.getString("phone"));
                 loadedEmployee.setNote(resultSet.getString("note"));
-                loadedEmployee.setHourly(resultSet.getBigDecimal("hourly"));
+                loadedEmployee.setHourly(resultSet.getDouble("hourly"));
                 loadedEmployee.setEmail(resultSet.getString("email"));
                 loadedEmployee.setBirthDate(resultSet.getString("birth_date"));
 
@@ -84,6 +85,27 @@ public class EmployeeDao {
         }
 
         return employees;
+    }
+
+    static public Employee loadEmployeeById(int id) {
+        Employee employee = new Employee();
+        String query = "SELECT * FROM employee where id=?";
+        Map<String, String> employeeEntry = DBService.executeSingleSelect(databaseName, query, String.valueOf(id));
+
+        try {
+            employee.setId(Integer.parseInt(employeeEntry.get("id")));
+            employee.setName(employeeEntry.get("name"));
+            employee.setSurname(employeeEntry.get("surname"));
+            employee.setAddress(employeeEntry.get("address"));
+            employee.setPhone(employeeEntry.get("phone"));
+            employee.setNote(employeeEntry.get("note"));
+            employee.setHourly(Double.parseDouble(employeeEntry.get("hourly")));
+            employee.setEmail(employeeEntry.get("email"));
+            employee.setBirthDate(employeeEntry.get("birth_date"));
+        } catch (Exception e) {
+
+        }
+        return employee;
     }
 
 }

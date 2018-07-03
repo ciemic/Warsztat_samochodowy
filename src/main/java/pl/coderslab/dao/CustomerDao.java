@@ -6,8 +6,7 @@ import pl.coderslab.services.DBService;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CustomerDao {
     private static String databaseName = "car_service";
@@ -53,7 +52,7 @@ public class CustomerDao {
 
     }
 
-    public static List<Customer> loadAllcustomers() {
+    public static List<Customer> loadAllCustomers() {
         List<Customer> customers = new ArrayList<>();
         String query = "Select * FROM customer";
 
@@ -78,5 +77,24 @@ public class CustomerDao {
         }
 
         return customers;
+    }
+
+    static public Customer loadCustomerById(int id) {
+        Customer customer = new Customer();
+        String query = "SELECT * FROM customer where id=?";
+        Map<String, String> employeeEntry = DBService.executeSingleSelect(databaseName, query, String.valueOf(id));
+
+        try {
+            customer.setId(Integer.parseInt(employeeEntry.get("id")));
+            customer.setName(employeeEntry.get("name"));
+            customer.setSurname(employeeEntry.get("surname"));
+            customer.setAddress(employeeEntry.get("address"));
+            customer.setPhone(employeeEntry.get("phone"));
+            customer.setEmail(employeeEntry.get("email"));
+            customer.setBirthDate(employeeEntry.get("birth_date"));
+        } catch (Exception e) {
+
+        }
+        return customer;
     }
 }

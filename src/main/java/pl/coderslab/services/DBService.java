@@ -54,45 +54,37 @@ public class DBService {
         return result;
     }
 
-    public static List<Object> executeSingleSelect(String database, String query, List<String> params) {
-        List<Object> objects = new ArrayList<>();
+    public static Map<String, String> executeSingleSelect(String database, String query, String param) {
+        Map<String, String> returnMap = new HashMap<>();
         try (Connection conn = connect(database)) {
             PreparedStatement prep = conn.prepareStatement(query);
 
-            int paramNumber = 1;
-            for (String param : params) {
-                prep.setString(paramNumber, param);
-                paramNumber++;
-            }
-            ResultSet result = prep.executeQuery();
-            ResultSetMetaData rsmd = result.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-            Map<String, String> column = new HashMap<>();
+            prep.setString(1, param);
 
-            while (result.first()) {
+            ResultSet resultSet = prep.executeQuery();
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+
+            while (resultSet.next()) {
                 for (int i = 1; i <= columnsNumber; i++) {
-                    String columnValue = result.getString(i);
+                    String columnValue = resultSet.getString(i);
                     String columnName = rsmd.getColumnName(i);
-                    column.put(columnName, columnValue);
-                    objects.add(column);
+                    returnMap.put(columnName, columnValue);
                 }
             }
-
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return objects;
+        return returnMap;
     }
 
 
     public static void executeUpdate(String database, String query, List<String> params) {
         try (Connection con = connect(database)) {
             PreparedStatement prep = con.prepareStatement(query);
-
             for (int i = 0; i < params.size(); i++) {
                 prep.setString(i + 1, params.get(i));
             }
-
             prep.executeUpdate();
             System.out.println("executeUpdate wykonany");
         } catch (SQLException e) {

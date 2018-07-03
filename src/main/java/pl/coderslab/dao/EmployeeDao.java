@@ -11,28 +11,33 @@ public class EmployeeDao {
 
     private static void addEmployee(Employee employee) {
 
-        String query = "Insert into employees Values (?,?,?,?,?,?,?)";
+        String query = "Insert into employees Values (?,?,?,?,?,?,?,?,?)";
 
         List<String> queryParams = new ArrayList<>();
         queryParams.add(String.valueOf(employee.getId()));
         queryParams.add(employee.getName());
         queryParams.add(employee.getSurname());
         queryParams.add(employee.getPhone());
+        queryParams.add(employee.getNote());
+        queryParams.add(String.valueOf(employee.getHourly()));
         queryParams.add(employee.getEmail());
         queryParams.add(employee.getBirthDate());
+
 
         DBService.executeUpdate(databaseName, query, queryParams);
     }
 
     private static void updateEmployee(Employee employee) {
         String query = "Update employee set name = ?, surname = ?, address = ?, phone = ?, email = ?" +
-                ", birth_date = ? Where id = ?";
+                ", note = ?, hourly = ?, birth_date = ? Where id = ?";
 
         List<String> queryParams = new ArrayList<>();
         queryParams.add(employee.getName());
         queryParams.add(employee.getSurname());
         queryParams.add(employee.getAddress());
         queryParams.add(employee.getPhone());
+        queryParams.add(employee.getNote());
+        queryParams.add(String.valueOf(employee.getHourly()));
         queryParams.add(employee.getEmail());
         queryParams.add(employee.getBirthDate());
 
@@ -48,5 +53,11 @@ public class EmployeeDao {
 
     }
 
+    public static void loadAllEmployees(Employee employee) {
+
+        String query = "Select * from employees";
+
+
+    }
 
 }

@@ -4,7 +4,7 @@ public class Vehicle {
     private int id;
     private String brand;
     private String model;
-    private String productionDate;
+    private String productionYear;
     private String registrationNumber;
     private String nextService;
     private int customerId;
@@ -33,12 +33,12 @@ public class Vehicle {
         this.model = model;
     }
 
-    public String getProductionDate() {
-        return productionDate;
+    public String getProductionYear() {
+        return productionYear;
     }
 
-    public void setProductionDate(String productionDate) {
-        this.productionDate = productionDate;
+    public void setProductionYear(String productionYear) {
+        this.productionYear = productionYear;
     }
 
     public String getRegistrationNumber() {
@@ -65,11 +65,11 @@ public class Vehicle {
         this.customerId = customerId;
     }
 
-    public Vehicle(int id, String brand, String model, String productionDate, String registrationNumber, String nextService, int customerId) {
+    public Vehicle(int id, String brand, String model, String productionYear, String registrationNumber, String nextService, int customerId) {
         setId(id);
         setBrand(brand);
         setModel(model);
-        setProductionDate(productionDate);
+        setProductionYear(productionYear);
         setRegistrationNumber(registrationNumber);
         setNextService(nextService);
         setCustomerId(customerId);

@@ -1,5 +1,6 @@
 package pl.coderslab.dao;
 
+import pl.coderslab.model.Employee;
 import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
 
@@ -8,10 +9,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class VehicleDao {
+
+    public static void main(String[] args) {
+        Vehicle vehicle = new Vehicle();
+        vehicle.setBrand("mercedes");
+        vehicle.setModel("model");
+        vehicle.setCustomerId(1);
+        //addVehicle(vehicle);
+
+        Vehicle vehicle1 = loadEmployeeById(2);
+        System.out.println(vehicle1);
+    }
 
     private static String databaseName = "car_service";
 
@@ -75,24 +88,24 @@ public class VehicleDao {
         return exercises;
     }
 
-    static public Vehicle loadVehicleById(Connection conn, int id) throws SQLException {
-        String sql = "SELECT * FROM vehicle where id=?";
-        PreparedStatement preparedStatement;
-        preparedStatement = conn.prepareStatement(sql);
-        preparedStatement.setInt(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            Vehicle loadedVehicle = new Vehicle();
-            loadedVehicle.setId(resultSet.getInt("id"));
-            loadedVehicle.setBrand(resultSet.getString("brand"));
-            loadedVehicle.setModel(resultSet.getString("model"));
-            loadedVehicle.setProductionYear(resultSet.getString("production_year"));
-            loadedVehicle.setRegistrationNumber(resultSet.getString("registration_number"));
-            loadedVehicle.setNextService(resultSet.getString("next_service"));
-            loadedVehicle.setCustomerId(resultSet.getInt("customer_id"));
-            return loadedVehicle;
-        }
-        return null;
-    }
+    static public Vehicle loadEmployeeById(int id) {
+        Vehicle vehicle = new Vehicle();
+        String query = "SELECT * FROM vehicle where id=?";
+        Map<String, String> vehicleEntry = new HashMap<>();
+        vehicleEntry = DBService.executeSingleSelect(databaseName, query, String.valueOf(id));
 
+        try {
+            vehicle.setId(Integer.parseInt(vehicleEntry.get("id")));
+            vehicle.setBrand(vehicleEntry.get("brand"));
+            vehicle.setModel(vehicleEntry.get("model"));
+            vehicle.setProductionYear(vehicleEntry.get("production_year"));
+            vehicle.setRegistrationNumber(vehicleEntry.get("registration_number"));
+            vehicle.setNextService(vehicleEntry.get("next_service"));
+            vehicle.setCustomerId((Integer.parseInt(vehicleEntry.get("customer_id"))));
+
+        } catch (Exception e) {
+
+        }
+        return vehicle;
+    }
 }

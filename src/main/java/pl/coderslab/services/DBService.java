@@ -78,6 +78,34 @@ public class DBService {
         return returnMap;
     }
 
+    public static List<Map<String, String>> executeMultipleSelect(String database, String query, List<String> params) {
+        List<Map<String, String>> returnlist = new ArrayList<>();
+        try (Connection conn = connect(database)) {
+            PreparedStatement prep = conn.prepareStatement(query);
+
+            int paramNumber = 1;
+            for (String param : params) {
+                prep.setString(paramNumber, param);
+                paramNumber++;
+            }
+
+            ResultSet resultSet = prep.executeQuery();
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (resultSet.next()) {
+                Map<String, String> map = new HashMap<>();
+                for (int i = 1; i <= columnsNumber; i++) {
+                    String columnValue = resultSet.getString(i);
+                    String columnName = rsmd.getColumnName(i);
+                    map.put(columnName, columnValue);
+                }
+                returnlist.add(map);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return returnlist;
+    }
 
     public static void executeUpdate(String database, String query, List<String> params) {
         try (Connection con = connect(database)) {

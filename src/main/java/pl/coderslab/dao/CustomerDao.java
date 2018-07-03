@@ -97,4 +97,32 @@ public class CustomerDao {
         }
         return customer;
     }
+
+    static public List<Customer> loadCustomerBySurname(String surname) {
+        List<Customer> customers = new ArrayList<>();
+        String query = "SELECT * FROM customer WHERE surname = ?";
+        List<String> param = new ArrayList<>();
+        param.add(surname);
+        List<Map<String, String>> mapList = DBService.executeMultipleSelect(databaseName, query, param);
+
+        for (Map<String, String> map : mapList) {
+            try {
+                Customer customer = new Customer();
+                customer.setId(Integer.parseInt(map.get("id")));
+                customer.setName(map.get("name"));
+                customer.setSurname(map.get("surname"));
+                customer.setAddress(map.get("address"));
+                customer.setPhone(map.get("phone"));
+                customer.setEmail(map.get("email"));
+                customer.setBirthDate(map.get("birth_date"));
+
+                customers.add(customer);
+            } catch (Exception e) {
+            }
+        }
+
+        return customers;
+    }
+
+
 }

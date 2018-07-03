@@ -3,8 +3,13 @@ package pl.coderslab.dao;
 import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class VehicleDao {
 
@@ -49,4 +54,45 @@ public class VehicleDao {
         DBService.executeUpdate(databaseName, query, queryParams);
 
     }
+
+    static public List<Vehicle> loadAllVehicles() throws SQLException {
+        List<Vehicle> exercises = new ArrayList<>();
+        String query = "SELECT * FROM vehicle";
+
+        PreparedStatement preparedStatement = DBService.connect(databaseName).prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Vehicle loadedVehicle = new Vehicle();
+            loadedVehicle.setId(resultSet.getInt("id"));
+            loadedVehicle.setBrand(resultSet.getString("brand"));
+            loadedVehicle.setModel(resultSet.getString("model"));
+            loadedVehicle.setProductionYear(resultSet.getString("production_year"));
+            loadedVehicle.setRegistrationNumber(resultSet.getString("registration_number"));
+            loadedVehicle.setNextService(resultSet.getString("next_service"));
+            loadedVehicle.setCustomerId(resultSet.getInt("customer_id"));
+            exercises.add(loadedVehicle);
+        }
+        return exercises;
+    }
+
+    static public Vehicle loadVehicleById(Connection conn, int id) throws SQLException {
+        String sql = "SELECT * FROM vehicle where id=?";
+        PreparedStatement preparedStatement;
+        preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            Vehicle loadedVehicle = new Vehicle();
+            loadedVehicle.setId(resultSet.getInt("id"));
+            loadedVehicle.setBrand(resultSet.getString("brand"));
+            loadedVehicle.setModel(resultSet.getString("model"));
+            loadedVehicle.setProductionYear(resultSet.getString("production_year"));
+            loadedVehicle.setRegistrationNumber(resultSet.getString("registration_number"));
+            loadedVehicle.setNextService(resultSet.getString("next_service"));
+            loadedVehicle.setCustomerId(resultSet.getInt("customer_id"));
+            return loadedVehicle;
+        }
+        return null;
+    }
+
 }

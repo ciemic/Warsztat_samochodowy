@@ -9,10 +9,10 @@ public class Employee extends Person {
     public Employee() {
     }
 
-    public Employee(String name, String surname, String address, String phone, String email, String birthDate, BigDecimal hourly, String note) {
-        super(name, surname, address, phone, email, birthDate);
-        this.hourly = hourly;
-        this.note = note;
+    public Employee(int id, String name, String surname, String address, String phone, String email, String birthDate, BigDecimal hourly, String note) {
+        super(id, name, surname, address, phone, email, birthDate);
+        setHourly(hourly);
+        setNote(note);
     }
 
 

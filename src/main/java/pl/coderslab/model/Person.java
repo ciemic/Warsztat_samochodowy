@@ -12,13 +12,14 @@ public class Person {
     public Person() {
     }
 
-    public Person(String name, String surname, String address, String phone, String email, String birthDate) {
-        this.name = name;
-        this.surname = surname;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-        this.birthDate = birthDate;
+    public Person(int id, String name, String surname, String address, String phone, String email, String birthDate) {
+        setId(id);
+        setName(name);
+        setSurname(surname);
+        setAddress(address);
+        setPhone(phone);
+        setEmail(email);
+        setBirthDate(birthDate);
     }
 
     public String getName() {
@@ -67,5 +68,13 @@ public class Person {
 
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

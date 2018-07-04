@@ -35,7 +35,6 @@ public class DBService {
 
     }
 
-
     public static ResultSet executeSelectQuery(String database, String query, List<String> params) {
         ResultSet result = null;
         try (Connection conn = connect(database)) {
@@ -54,6 +53,47 @@ public class DBService {
         return result;
     }
 
+    public static void executeUpdate(String database, String query, List<String> params) {
+        try (Connection con = connect(database)) {
+            PreparedStatement prep = con.prepareStatement(query);
+            for (int i = 0; i < params.size(); i++) {
+                prep.setString(i + 1, params.get(i));
+            }
+            prep.executeUpdate();
+            System.out.println("executeUpdate wykonany");
+
+        } catch (SQLException e) {
+
+            System.out.println(e);
+        }
+
+    }
+
+    public static Map<String, String> executeSingleSelect(String database, String query, String param) {
+        Map<String, String> returnMap = new HashMap<>();
+        try (Connection conn = connect(database)) {
+            PreparedStatement prep = conn.prepareStatement(query);
+
+            prep.setString(1, param);
+
+            ResultSet resultSet = prep.executeQuery();
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+
+            while (resultSet.next()) {
+                for (int i = 1; i <= columnsNumber; i++) {
+                    String columnValue = resultSet.getString(i);
+                    String columnName = rsmd.getColumnName(i);
+                    returnMap.put(columnName, columnValue);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return returnMap;
+
+    }
 
     public static List<Map<String, String>> executeMultipleSelect(String database, String query, List<String> params) {
         List<Map<String, String>> returnlist = new ArrayList<>();
@@ -82,49 +122,6 @@ public class DBService {
             System.out.println(e);
         }
         return returnlist;
-    }
-
-    public static void executeUpdate(String database, String query, List<String> params) {
-        try (Connection con = connect(database)) {
-            PreparedStatement prep = con.prepareStatement(query);
-            for (int i = 0; i < params.size(); i++) {
-                prep.setString(i + 1, params.get(i));
-            }
-            prep.executeUpdate();
-            System.out.println("executeUpdate wykonany");
-
-        } catch (SQLException e) {
-
-            System.out.println(e);
-        }
-
-    }
-
-
-    public static Map<String, String> executeSingleSelect(String database, String query, String param) {
-        Map<String, String> returnMap = new HashMap<>();
-        try (Connection conn = connect(database)) {
-            PreparedStatement prep = conn.prepareStatement(query);
-
-            prep.setString(1, param);
-
-            ResultSet resultSet = prep.executeQuery();
-            ResultSetMetaData rsmd = resultSet.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-
-            while (resultSet.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                    String columnValue = resultSet.getString(i);
-                    String columnName = rsmd.getColumnName(i);
-                    returnMap.put(columnName, columnValue);
-                }
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return returnMap;
-
     }
 
 }

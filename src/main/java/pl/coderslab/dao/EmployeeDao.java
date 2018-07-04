@@ -1,6 +1,8 @@
 package pl.coderslab.dao;
 
+import pl.coderslab.model.Customer;
 import pl.coderslab.model.Employee;
+import pl.coderslab.model.Order;
 import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
 
@@ -55,7 +57,6 @@ public class EmployeeDao {
         List<String> queryParams = new ArrayList<>();
         queryParams.add(String.valueOf(employee.getId()));
         DBService.executeUpdate(databaseName, query, queryParams);
-
     }
 
     public static List<Employee> loadAllEmployees() {
@@ -83,31 +84,41 @@ public class EmployeeDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return employees;
     }
 
     static public Employee loadEmployeeById(int id) {
-        Employee employee = new Employee();
         String query = "SELECT * FROM employee where id=?";
         Map<String, String> employeeEntry = DBService.executeSingleSelect(databaseName, query, String.valueOf(id));
 
+        return getEmployee(employeeEntry);
+    }
+
+    static public List<Order> loadEmployeeOrders(Employee employee){
+        String query = "SELECT * FROM order where employee_id=?";
+        List<Order> returnList = new ArrayList<>();
+
+
+
+        return returnList;
+    }
+
+
+    private static Employee getEmployee(Map<String, String> employeeEntryMap) {
+        Employee employee = new Employee();
         try {
-            employee.setId(Integer.parseInt(employeeEntry.get("id")));
-            employee.setName(employeeEntry.get("name"));
-            employee.setSurname(employeeEntry.get("surname"));
-            employee.setAddress(employeeEntry.get("address"));
-            employee.setPhone(employeeEntry.get("phone"));
-            employee.setNote(employeeEntry.get("note"));
-            employee.setHourly(Double.parseDouble(employeeEntry.get("hourly")));
-            employee.setEmail(employeeEntry.get("email"));
-            employee.setBirthDate(employeeEntry.get("birth_date"));
+            employee.setId(Integer.parseInt(employeeEntryMap.get("id")));
+            employee.setName(employeeEntryMap.get("name"));
+            employee.setSurname(employeeEntryMap.get("surname"));
+            employee.setAddress(employeeEntryMap.get("address"));
+            employee.setPhone(employeeEntryMap.get("phone"));
+            employee.setNote(employeeEntryMap.get("note"));
+            employee.setHourly(Double.parseDouble(employeeEntryMap.get("phone")));
+            employee.setEmail(employeeEntryMap.get("email"));
+            employee.setBirthDate(employeeEntryMap.get("birth_date"));
         } catch (Exception e) {
 
         }
         return employee;
     }
-
-
-
 }

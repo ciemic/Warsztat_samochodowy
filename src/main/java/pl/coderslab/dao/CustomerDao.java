@@ -1,6 +1,11 @@
 package pl.coderslab.dao;
+
 import pl.coderslab.model.Customer;
+import pl.coderslab.model.Employee;
+import pl.coderslab.model.Order;
+import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -94,6 +99,20 @@ public class CustomerDao {
             customers.add(getCustomer(map));
         }
         return customers;
+    }
+
+    static public List<Vehicle> loadCustomerVehicles(Customer customer) {
+        String query = "SELECT * FROM car_service.vehicle where customer_id=?";
+        List<Vehicle> vehicles = new ArrayList<>();
+        List<String> param = new ArrayList<>();
+        param.add(String.valueOf(customer.getId()));
+
+        List<Map<String, String>> mapList = DBService.executeMultipleSelect(databaseName, query, param);
+
+        for (Map<String, String> map : mapList) {
+            vehicles.add(VehicleDao.getVehicle(map));
+        }
+        return vehicles;
     }
 
     private static Customer getCustomer(Map<String, String> customerEntryMap) {

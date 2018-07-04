@@ -102,7 +102,7 @@ public class VehicleDao {
         return vehicle;
     }
 
-    private static Vehicle getVehicle(Map<String, String> vehicleEntry) {
+    protected static Vehicle getVehicle(Map<String, String> vehicleEntry) {
         Vehicle vehicle = new Vehicle();
         try {
             vehicle.setId(Integer.parseInt(vehicleEntry.get("id")));

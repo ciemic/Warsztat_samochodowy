@@ -1,8 +1,6 @@
 package pl.coderslab.dao;
-
 import pl.coderslab.model.Customer;
 import pl.coderslab.services.DBService;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,16 +73,14 @@ public class CustomerDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return customers;
     }
 
     static public Customer loadCustomerById(int id) {
-        Customer customer = new Customer();
         String query = "SELECT * FROM customer where id=?";
-        Map<String, String> employeeEntry = DBService.executeSingleSelect(databaseName, query, String.valueOf(id));
+        Map<String, String> customerEntry = DBService.executeSingleSelect(databaseName, query, String.valueOf(id));
 
-        return getCustomer(employeeEntry);
+        return getCustomer(customerEntry);
     }
 
 
@@ -98,22 +94,20 @@ public class CustomerDao {
         for (Map<String, String> map : mapList) {
             customers.add(getCustomer(map));
         }
-
         return customers;
     }
 
-    private static Customer getCustomer(Map<String, String> employeeEntry) {
+    private static Customer getCustomer(Map<String, String> customerEntryMap) {
         Customer customer = new Customer();
         try {
-            customer.setId(Integer.parseInt(employeeEntry.get("id")));
-            customer.setName(employeeEntry.get("name"));
-            customer.setSurname(employeeEntry.get("surname"));
-            customer.setAddress(employeeEntry.get("address"));
-            customer.setPhone(employeeEntry.get("phone"));
-            customer.setEmail(employeeEntry.get("email"));
-            customer.setBirthDate(employeeEntry.get("birth_date"));
+            customer.setId(Integer.parseInt(customerEntryMap.get("id")));
+            customer.setName(customerEntryMap.get("name"));
+            customer.setSurname(customerEntryMap.get("surname"));
+            customer.setAddress(customerEntryMap.get("address"));
+            customer.setPhone(customerEntryMap.get("phone"));
+            customer.setEmail(customerEntryMap.get("email"));
+            customer.setBirthDate(customerEntryMap.get("birth_date"));
         } catch (Exception e) {
-
         }
         return customer;
     }

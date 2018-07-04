@@ -94,13 +94,32 @@ public class EmployeeDao {
         return getEmployee(employeeEntry);
     }
 
-    static public List<Order> loadEmployeeOrders(Employee employee){
-        String query = "SELECT * FROM order where employee_id=?";
-        List<Order> returnList = new ArrayList<>();
+    static public List<Order> loadEmployeeOrders(Employee employee) {
+        String query = "SELECT * FROM car_service.order where employee_id=?";
+        List<Order> orders = new ArrayList<>();
+        List<String> param = new ArrayList<>();
+        param.add(String.valueOf(employee.getId()));
 
+        List<Map<String, String>> mapList = DBService.executeMultipleSelect(databaseName, query, param);
 
+        for (Map<String, String> map : mapList) {
+            orders.add(OrderDao.getOrder(map));
+        }
+        return orders;
+    }
 
-        return returnList;
+    static public List<Order> loadEmployeeOrdersInProgress(Employee employee) {
+        String query = "SELECT * FROM car_service.order where employee_id=? AND status_id<4";
+        List<Order> orders = new ArrayList<>();
+        List<String> param = new ArrayList<>();
+        param.add(String.valueOf(employee.getId()));
+
+        List<Map<String, String>> mapListOfOrders = DBService.executeMultipleSelect(databaseName, query, param);
+
+        for (Map<String, String> map : mapListOfOrders) {
+            orders.add(OrderDao.getOrder(map));
+        }
+        return orders;
     }
 
 

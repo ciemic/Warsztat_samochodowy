@@ -2,7 +2,6 @@ package pl.coderslab.dao;
 
 import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,19 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public class VehicleDao {
-
-    public static void main(String[] args) {
-        Vehicle vehicle = new Vehicle();
-        vehicle.setBrand("mercedes");
-        vehicle.setModel("model");
-        vehicle.setCustomerId(1);
-        try {
-            List<Vehicle> vehicles= loadAllVehicles();
-            System.out.println(vehicles);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     private static String databaseName = "car_service";
 
@@ -88,8 +74,9 @@ public class VehicleDao {
     }
 
     static public Vehicle loadVehicleById(int id) {
-        List<Vehicle> vehicles = new ArrayList<>();
         String query = "SELECT * FROM customer WHERE id = ?";
+
+        List<Vehicle> vehicles = new ArrayList<>();
         List<String> param = new ArrayList<>();
         param.add(String.valueOf(id));
         List<Map<String, String>> mapList = DBService.executeMultipleSelect(databaseName, query, param);
@@ -117,26 +104,4 @@ public class VehicleDao {
         }
         return vehicle;
     }
-
-//    static public Vehicle loadVehicleById(int id) {
-//        Vehicle vehicle = new Vehicle();
-//        String query = "SELECT * FROM vehicle where id=?";
-//        Map<String, String> vehicleEntry = new HashMap<>();
-//        vehicleEntry = DBService.executeSingleSelect(databaseName, query, String.valueOf(id));
-//
-//        try {
-//            vehicle.setId(Integer.parseInt(vehicleEntry.get("id")));
-//            vehicle.setBrand(vehicleEntry.get("brand"));
-//            vehicle.setModel(vehicleEntry.get("model"));
-//            vehicle.setProductionYear(vehicleEntry.get("production_year"));
-//            vehicle.setRegistrationNumber(vehicleEntry.get("registration_number"));
-//            vehicle.setNextService(vehicleEntry.get("next_service"));
-//            vehicle.setCustomerId((Integer.parseInt(vehicleEntry.get("customer_id"))));
-//
-//        } catch (Exception e) {
-//
-//        }
-//        return vehicle;
-//    }
-
 }

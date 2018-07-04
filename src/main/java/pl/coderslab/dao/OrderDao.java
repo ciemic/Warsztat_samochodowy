@@ -1,10 +1,8 @@
 package pl.coderslab.dao;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import pl.coderslab.model.Order;
 import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,33 +13,6 @@ import java.util.Map;
 public class OrderDao {
 
     private static String databaseName = "car_service";
-
-    public static void main(String[] args) {
-        Order order = new Order();
-        order.setVehicleId(1);
-        order.setProblemDescription("popsuty");
-        order.setEmployeeId(1);
-        order.setStatusId(1);
-        order.setTotalPrice(500.00);
-        order.setPartsCost(100.00);
-        order.setId(9);
-//
-//        updateOrder(order);
-
-//        try{
-////            List<Order> orders = loadAllOrders();
-////            System.out.println(orders);
-//
-//
-//        } catch (SQLException e){
-//            System.out.println(e);
-//        }
-
-        Order order1 = loadOrderById(7);
-        System.out.println(order1);
-
-
-    }
 
     private static void addOrder(Order order) {
 
@@ -158,5 +129,18 @@ public class OrderDao {
         return order;
     }
 
+    static public List<Order> loadVehicleHistory(Vehicle vehicle) {
+        String query = "SELECT * FROM car_service.order where vehicle_id=?";
+        List<Order> orders = new ArrayList<>();
+        List<String> param = new ArrayList<>();
+        param.add(String.valueOf(vehicle.getId()));
+
+        List<Map<String, String>> mapList = DBService.executeMultipleSelect(databaseName, query, param);
+
+        for (Map<String, String> map : mapList) {
+            orders.add(OrderDao.getOrder(map));
+        }
+        return orders;
+    }
 
 }

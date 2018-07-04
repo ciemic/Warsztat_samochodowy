@@ -1,7 +1,5 @@
 package pl.coderslab.model;
 
-import java.math.BigDecimal;
-
 public class Order {
     private int id;
     private int statusId;
@@ -115,21 +113,4 @@ public class Order {
     public Order() {
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", statusId=" + statusId +
-                ", vehicleId=" + vehicleId +
-                ", problemDescription='" + problemDescription + '\'' +
-                ", acceptance='" + acceptance + '\'' +
-                ", plannedMaintenance='" + plannedMaintenance + '\'' +
-                ", maintenanceStart='" + maintenanceStart + '\'' +
-                ", employeeId=" + employeeId +
-                ", maintenaceDescription='" + maintenaceDescription + '\'' +
-                ", totalPrice=" + totalPrice +
-                ", partsCost=" + partsCost +
-                ", hoursAmount=" + hoursAmount +
-                '}';
-    }
 }

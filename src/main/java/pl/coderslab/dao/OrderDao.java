@@ -1,10 +1,12 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.model.Order;
+import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class OrderDao {
 
@@ -75,6 +77,33 @@ public class OrderDao {
         queryParams.add(String.valueOf(order.getId()));
         DBService.executeUpdate(databaseName, query, queryParams);
 
+    }
+
+    protected static Order getOrder(Map<String, String> orderEntry) {
+
+        String query = "Update `car_service`.`order` SET `status_id`=?, `vehicle_id`=?, `problem_description`=?, `acceptance`=?," +
+                "`planned_maintenance`=?, `maintenance_start`=?, `employee_id`=?, `maintenance_description`=?, `total_price`=?," +
+                "`parts_cost`=?, `hours_amount`=? Where id = ?";
+
+        Order order = new Order();
+        try {
+            order.setId(Integer.parseInt(orderEntry.get("id")));
+            order.setStatusId(Integer.parseInt(orderEntry.get("status_id")));
+            order.setVehicleId(Integer.parseInt(orderEntry.get("vehicle_id")));
+            order.setProblemDescription(orderEntry.get("problem_description"));
+            order.setAcceptance(orderEntry.get("acceptance"));
+            order.setPlannedMaintenance(orderEntry.get("planned_maintenance"));
+            order.setMaintenanceStart(orderEntry.get("maintenance_start"));
+            order.setEmployeeId(Integer.parseInt(orderEntry.get("employee_id")));
+            order.setMaintenaceDescription(orderEntry.get("maintenance_description"));
+            order.setTotalPrice(Double.parseDouble(orderEntry.get("total_price")));
+            order.setPartsCost(Double.parseDouble(orderEntry.get("parts_cost")));
+            order.setHoursAmount(Integer.parseInt(orderEntry.get("hours_amount")));
+
+        } catch (Exception e) {
+
+        }
+        return order;
     }
 
 }

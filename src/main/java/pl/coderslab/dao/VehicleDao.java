@@ -1,15 +1,12 @@
 package pl.coderslab.dao;
 
-import pl.coderslab.model.Employee;
 import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,10 +17,12 @@ public class VehicleDao {
         vehicle.setBrand("mercedes");
         vehicle.setModel("model");
         vehicle.setCustomerId(1);
-        //addVehicle(vehicle);
-
-        Vehicle vehicle1 = loadEmployeeById(2);
-        System.out.println(vehicle1);
+        try {
+            List<Vehicle> vehicles= loadAllVehicles();
+            System.out.println(vehicles);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private static String databaseName = "car_service";
@@ -69,7 +68,7 @@ public class VehicleDao {
     }
 
     static public List<Vehicle> loadAllVehicles() throws SQLException {
-        List<Vehicle> exercises = new ArrayList<>();
+        List<Vehicle> vehicles = new ArrayList<>();
         String query = "SELECT * FROM vehicle";
 
         PreparedStatement preparedStatement = DBService.connect(databaseName).prepareStatement(query);
@@ -83,17 +82,27 @@ public class VehicleDao {
             loadedVehicle.setRegistrationNumber(resultSet.getString("registration_number"));
             loadedVehicle.setNextService(resultSet.getString("next_service"));
             loadedVehicle.setCustomerId(resultSet.getInt("customer_id"));
-            exercises.add(loadedVehicle);
+            vehicles.add(loadedVehicle);
         }
-        return exercises;
+        return vehicles;
     }
 
-    static public Vehicle loadEmployeeById(int id) {
-        Vehicle vehicle = new Vehicle();
-        String query = "SELECT * FROM vehicle where id=?";
-        Map<String, String> vehicleEntry = new HashMap<>();
-        vehicleEntry = DBService.executeSingleSelect(databaseName, query, String.valueOf(id));
+    static public List<Vehicle> loadVehicleById(int id) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        String query = "SELECT * FROM customer WHERE id = ?";
+        List<String> param = new ArrayList<>();
+        param.add(String.valueOf(id));
+        List<Map<String, String>> mapList = DBService.executeMultipleSelect(databaseName, query, param);
 
+        for (Map<String, String> map : mapList) {
+            vehicles.add(getVehicle(map));
+        }
+
+        return vehicles;
+    }
+
+    private static Vehicle getVehicle(Map<String, String> vehicleEntry) {
+        Vehicle vehicle = new Vehicle();
         try {
             vehicle.setId(Integer.parseInt(vehicleEntry.get("id")));
             vehicle.setBrand(vehicleEntry.get("brand"));
@@ -102,10 +111,31 @@ public class VehicleDao {
             vehicle.setRegistrationNumber(vehicleEntry.get("registration_number"));
             vehicle.setNextService(vehicleEntry.get("next_service"));
             vehicle.setCustomerId((Integer.parseInt(vehicleEntry.get("customer_id"))));
-
         } catch (Exception e) {
 
         }
         return vehicle;
     }
+
+//    static public Vehicle loadVehicleById(int id) {
+//        Vehicle vehicle = new Vehicle();
+//        String query = "SELECT * FROM vehicle where id=?";
+//        Map<String, String> vehicleEntry = new HashMap<>();
+//        vehicleEntry = DBService.executeSingleSelect(databaseName, query, String.valueOf(id));
+//
+//        try {
+//            vehicle.setId(Integer.parseInt(vehicleEntry.get("id")));
+//            vehicle.setBrand(vehicleEntry.get("brand"));
+//            vehicle.setModel(vehicleEntry.get("model"));
+//            vehicle.setProductionYear(vehicleEntry.get("production_year"));
+//            vehicle.setRegistrationNumber(vehicleEntry.get("registration_number"));
+//            vehicle.setNextService(vehicleEntry.get("next_service"));
+//            vehicle.setCustomerId((Integer.parseInt(vehicleEntry.get("customer_id"))));
+//
+//        } catch (Exception e) {
+//
+//        }
+//        return vehicle;
+//    }
+
 }

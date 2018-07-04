@@ -2,6 +2,7 @@ package pl.coderslab.dao;
 
 import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,10 +17,12 @@ public class VehicleDao {
         vehicle.setBrand("mercedes");
         vehicle.setModel("model");
         vehicle.setCustomerId(1);
-        //addVehicle(vehicle);
-
-        Vehicle vehicle1 = (Vehicle)loadVehicleById(2);
-        System.out.println(vehicle1);
+        try {
+            List<Vehicle> vehicles= loadAllVehicles();
+            System.out.println(vehicles);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private static String databaseName = "car_service";
@@ -134,4 +137,5 @@ public class VehicleDao {
 //        }
 //        return vehicle;
 //    }
+
 }

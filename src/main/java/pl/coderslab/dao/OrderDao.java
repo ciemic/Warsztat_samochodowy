@@ -18,7 +18,6 @@ public class OrderDao {
         order.setPartsCost(100.00);
         order.setId(9);
 
-        //addOrder(order);
         updateOrder(order);
 
     }
@@ -50,7 +49,7 @@ public class OrderDao {
     private static void updateOrder(Order order) {
         String query = "Update `car_service`.`order` SET `status_id`=?, `vehicle_id`=?, `problem_description`=?, `acceptance`=?," +
                 "`planned_maintenance`=?, `maintenance_start`=?, `employee_id`=?, `maintenance_description`=?, `total_price`=?," +
-                "`parts_cost`=?, `hours_amount=?` Where id = ?";
+                "`parts_cost`=?, `hours_amount`=? Where id = ?";
 
         List<String> queryParams = new ArrayList<>();
         queryParams.add(String.valueOf(order.getStatusId()));

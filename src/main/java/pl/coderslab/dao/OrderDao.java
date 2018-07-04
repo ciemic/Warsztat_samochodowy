@@ -124,7 +124,6 @@ public class OrderDao {
             order.setHoursAmount(Integer.parseInt(orderEntry.get("hours_amount")));
 
         } catch (Exception e) {
-
         }
         return order;
     }
@@ -142,5 +141,4 @@ public class OrderDao {
         }
         return orders;
     }
-
 }

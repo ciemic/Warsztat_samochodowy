@@ -47,7 +47,6 @@ public class CustomerDao {
         List<String> queryParams = new ArrayList<>();
         queryParams.add(String.valueOf(customer.getId()));
         DBService.executeUpdate(databaseName, query, queryParams);
-
     }
 
     public static List<Customer> loadAllCustomers() {

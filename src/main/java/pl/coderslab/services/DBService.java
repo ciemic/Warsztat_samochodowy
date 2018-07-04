@@ -14,8 +14,6 @@ public class DBService {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        ;
-
         return DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/" + database + "?useUnicode=true" +
                         "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" +
@@ -63,7 +61,6 @@ public class DBService {
             System.out.println("executeUpdate wykonany");
 
         } catch (SQLException e) {
-
             System.out.println(e);
         }
 

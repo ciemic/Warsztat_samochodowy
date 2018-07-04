@@ -84,8 +84,9 @@ public class CustomerDao {
 
 
     static public List<Customer> loadCustomerBySurname(String surname) {
-        List<Customer> customers = new ArrayList<>();
         String query = "SELECT * FROM customer WHERE surname = ?";
+
+        List<Customer> customers = new ArrayList<>();
         List<String> param = new ArrayList<>();
         param.add(surname);
         List<Map<String, String>> mapList = DBService.executeMultipleSelect(databaseName, query, param);

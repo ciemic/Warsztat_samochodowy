@@ -14,8 +14,6 @@ public class DBService {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        ;
-
         return DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/" + database + "?useUnicode=true" +
                         "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC" +
@@ -32,7 +30,6 @@ public class DBService {
             rs.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
         }
         return rowCount;
-
     }
 
     public static ResultSet executeSelectQuery(String database, String query, List<String> params) {
@@ -45,7 +42,6 @@ public class DBService {
                 prep.setString(paramNumber, param);
                 paramNumber++;
             }
-
             result = prep.executeQuery();
         } catch (SQLException e) {
             System.out.println(e);
@@ -63,10 +59,8 @@ public class DBService {
             System.out.println("executeUpdate wykonany");
 
         } catch (SQLException e) {
-
             System.out.println(e);
         }
-
     }
 
     public static Map<String, String> executeSingleSelect(String database, String query, String param) {
@@ -87,12 +81,10 @@ public class DBService {
                     returnMap.put(columnName, columnValue);
                 }
             }
-
         } catch (SQLException e) {
             System.out.println(e);
         }
         return returnMap;
-
     }
 
     public static List<Map<String, String>> executeMultipleSelect(String database, String query, List<String> params) {
@@ -123,5 +115,4 @@ public class DBService {
         }
         return returnlist;
     }
-
 }

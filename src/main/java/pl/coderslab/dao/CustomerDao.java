@@ -1,8 +1,6 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.model.Customer;
-import pl.coderslab.model.Employee;
-import pl.coderslab.model.Order;
 import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
 
@@ -26,7 +24,6 @@ public class CustomerDao {
         queryParams.add(customer.getPhone());
         queryParams.add(customer.getEmail());
         queryParams.add(customer.getBirthDate());
-
 
         DBService.executeUpdate(databaseName, query, queryParams);
     }
@@ -86,7 +83,6 @@ public class CustomerDao {
 
         return getCustomer(customerEntry);
     }
-
 
     static public List<Customer> loadCustomerBySurname(String surname) {
         List<Customer> customers = new ArrayList<>();

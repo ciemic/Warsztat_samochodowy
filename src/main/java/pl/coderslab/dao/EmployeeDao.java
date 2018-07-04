@@ -1,12 +1,9 @@
 package pl.coderslab.dao;
 
-import pl.coderslab.model.Customer;
 import pl.coderslab.model.Employee;
 import pl.coderslab.model.Order;
-import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
 
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +26,6 @@ public class EmployeeDao {
         queryParams.add(String.valueOf(employee.getHourly()));
         queryParams.add(employee.getEmail());
         queryParams.add(employee.getBirthDate());
-
 
         DBService.executeUpdate(databaseName, query, queryParams);
     }

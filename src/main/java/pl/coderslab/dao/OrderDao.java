@@ -1,14 +1,20 @@
 package pl.coderslab.dao;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import pl.coderslab.model.Order;
 import pl.coderslab.model.Vehicle;
 import pl.coderslab.services.DBService;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class OrderDao {
+
+    private static String databaseName = "car_service";
 
     public static void main(String[] args) {
         Order order = new Order();
@@ -19,12 +25,23 @@ public class OrderDao {
         order.setTotalPrice(500.00);
         order.setPartsCost(100.00);
         order.setId(9);
+//
+//        updateOrder(order);
 
-        updateOrder(order);
+//        try{
+////            List<Order> orders = loadAllOrders();
+////            System.out.println(orders);
+//
+//
+//        } catch (SQLException e){
+//            System.out.println(e);
+//        }
+
+        Order order1 = loadOrderById(7);
+        System.out.println(order1);
+
 
     }
-
-    private static String databaseName = "car_service";
 
     private static void addOrder(Order order) {
 
@@ -79,12 +96,47 @@ public class OrderDao {
 
     }
 
+    static public List<Order> loadAllOrders() throws SQLException {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM `car_service`.`order`";
+
+        PreparedStatement preparedStatement = DBService.connect(databaseName).prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Order loadedOrder = new Order();
+            loadedOrder.setId(resultSet.getInt("id"));
+            loadedOrder.setStatusId(resultSet.getInt("status_id"));
+            loadedOrder.setVehicleId(resultSet.getInt("vehicle_id"));
+            loadedOrder.setProblemDescription(resultSet.getString("problem_description"));
+            loadedOrder.setAcceptance(resultSet.getString("acceptance"));
+            loadedOrder.setPlannedMaintenance(resultSet.getString("planned_maintenance"));
+            loadedOrder.setMaintenanceStart(resultSet.getString("maintenance_start"));
+            loadedOrder.setEmployeeId(resultSet.getInt("employee_id"));
+            loadedOrder.setMaintenaceDescription(resultSet.getString("maintenance_description"));
+            loadedOrder.setTotalPrice(resultSet.getDouble("total_price"));
+            loadedOrder.setPartsCost(resultSet.getDouble("parts_cost"));
+            loadedOrder.setHoursAmount(resultSet.getInt("hours_amount"));
+            orders.add(loadedOrder);
+        }
+        return orders;
+    }
+
+    static public Order loadOrderById(int id) {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM `car_service`.`order` WHERE id = ?";
+        List<String> param = new ArrayList<>();
+        param.add(String.valueOf(id));
+        List<Map<String, String>> mapList = DBService.executeMultipleSelect(databaseName, query, param);
+
+        for (Map<String, String> map : mapList) {
+            orders.add(getOrder(map));
+        }
+        Order order = orders.get(0);
+        return order;
+    }
+
+
     protected static Order getOrder(Map<String, String> orderEntry) {
-
-        String query = "Update `car_service`.`order` SET `status_id`=?, `vehicle_id`=?, `problem_description`=?, `acceptance`=?," +
-                "`planned_maintenance`=?, `maintenance_start`=?, `employee_id`=?, `maintenance_description`=?, `total_price`=?," +
-                "`parts_cost`=?, `hours_amount`=? Where id = ?";
-
         Order order = new Order();
         try {
             order.setId(Integer.parseInt(orderEntry.get("id")));
@@ -105,5 +157,6 @@ public class OrderDao {
         }
         return order;
     }
+
 
 }

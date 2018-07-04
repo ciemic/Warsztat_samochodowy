@@ -87,7 +87,7 @@ public class VehicleDao {
         return vehicles;
     }
 
-    static public List<Vehicle> loadVehicleById(int id) {
+    static public Vehicle loadVehicleById(int id) {
         List<Vehicle> vehicles = new ArrayList<>();
         String query = "SELECT * FROM customer WHERE id = ?";
         List<String> param = new ArrayList<>();
@@ -97,8 +97,9 @@ public class VehicleDao {
         for (Map<String, String> map : mapList) {
             vehicles.add(getVehicle(map));
         }
+        Vehicle vehicle = vehicles.get(0);
 
-        return vehicles;
+        return vehicle;
     }
 
     private static Vehicle getVehicle(Map<String, String> vehicleEntry) {

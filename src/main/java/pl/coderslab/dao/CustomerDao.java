@@ -28,7 +28,7 @@ public class CustomerDao {
         DBService.executeUpdate(databaseName, query, queryParams);
     }
 
-    public static void updateEmployee(Customer customer) {
+    public static void updateCustomer(Customer customer) {
         String query = "Update customer set name = ?, surname = ?, address = ?, phone = ?" +
                 ", email = ?, birth_date = ? Where id = ?";
 
@@ -55,10 +55,9 @@ public class CustomerDao {
         List<Customer> customers = new ArrayList<>();
         String query = "Select * FROM customer";
 
-        PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = DBService.connect(databaseName).prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
+
+            ResultSet resultSet = DBService.executeSelectQuery(databaseName, query);
             while (resultSet.next()) {
                 Customer loadedCustomer = new Customer();
                 loadedCustomer.setId(resultSet.getInt("id"));

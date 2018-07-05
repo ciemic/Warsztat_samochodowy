@@ -48,6 +48,8 @@ public class EmployeeDao {
     }
 
     public static void deleteEmployee(Employee employee) {
+
+
         String query = "DELETE FROM employee WHERE id=?";
 
         List<String> queryParams = new ArrayList<>();
@@ -59,10 +61,8 @@ public class EmployeeDao {
         List<Employee> employees = new ArrayList<>();
         String query = "Select * FROM employee";
 
-        PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = DBService.connect(databaseName).prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = DBService.executeSelectQuery(databaseName, query);
             while (resultSet.next()) {
                 Employee loadedEmployee = new Employee();
                 loadedEmployee.setId(resultSet.getInt("id"));

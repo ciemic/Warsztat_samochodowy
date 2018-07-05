@@ -20,7 +20,7 @@ public class Orders extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            List<Order> orders = OrderDao.loadAllCurrentOrders();
+            List<Order> orders = OrderDao.loadAllActiveOrders();
             request.setAttribute("orders", orders);
         } catch (SQLException e) {
             e.printStackTrace();

@@ -11,6 +11,11 @@ import java.util.Map;
 
 public class VehicleDao {
 
+    public static void main(String[] args) {
+        Vehicle vehicle = loadVehicleById(1);
+        System.out.println(vehicle);
+    }
+
     private static String databaseName = "car_service";
 
     private static void addVehicle(Vehicle vehicle) {
@@ -74,7 +79,7 @@ public class VehicleDao {
     }
 
     static public Vehicle loadVehicleById(int id) {
-        String query = "SELECT * FROM customer WHERE id = ?";
+        String query = "SELECT * FROM vehicle WHERE id = ?";
 
         List<Vehicle> vehicles = new ArrayList<>();
         List<String> param = new ArrayList<>();

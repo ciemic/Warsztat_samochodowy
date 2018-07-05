@@ -78,4 +78,17 @@ public class Vehicle {
     public Vehicle() {
     }
 
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", productionYear='" + productionYear + '\'' +
+                ", registrationNumber='" + registrationNumber + '\'' +
+                ", nextService='" + nextService + '\'' +
+                ", customerId=" + customerId +
+                '}';
+    }
 }

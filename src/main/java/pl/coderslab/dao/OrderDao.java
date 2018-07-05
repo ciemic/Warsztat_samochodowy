@@ -92,7 +92,7 @@ public class OrderDao {
         return orders;
     }
 
-    static public List<Order> loadAllCurrentOrders() throws SQLException {
+    static public List<Order> loadAllActiveOrders() throws SQLException {
         List<Order> orders = new ArrayList<>();
         String query = "SELECT * FROM `car_service`.`order` WHERE status_id<5 ORDER BY acceptance DESC";
 

@@ -60,7 +60,7 @@
             <tr>
                 <th scope="row" style="width: 10%">${order.id}</th>
                 <td style="width: 80%">${order.problemDescription}</td>
-                <td style="width: 10%"><a href="/orders?id=${order.id}" class="btn btn-primary">Details</a></td>
+                <td style="width: 10%"><a href="/order?id=${order.id}" class="btn btn-primary">Details</a></td>
             </tr>
         </c:forEach>
         </tbody>

@@ -10,7 +10,7 @@ public class DBService {
 
     public static Connection connect(String database) throws SQLException {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

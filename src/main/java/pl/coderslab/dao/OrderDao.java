@@ -71,7 +71,8 @@ public class OrderDao {
         List<Order> orders = new ArrayList<>();
         String query = "SELECT * FROM `car_service`.`order`";
 
-        ResultSet resultSet = DBService.executeSelectQuery(databaseName, query);
+        PreparedStatement preparedStatement = DBService.connect(databaseName).prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Order loadedOrder = new Order();
             loadedOrder.setId(resultSet.getInt("id"));

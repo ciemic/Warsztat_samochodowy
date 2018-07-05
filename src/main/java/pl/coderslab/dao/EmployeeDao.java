@@ -10,6 +10,10 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class EmployeeDao {
+    public static void main(String[] args) {
+        List<Employee> employees = loadAllEmployees();
+        System.out.println(employees);
+    }
     private static String databaseName = "car_service";
 
     public static void addEmployee(Employee employee) {
@@ -48,8 +52,6 @@ public class EmployeeDao {
     }
 
     public static void deleteEmployee(Employee employee) {
-
-
         String query = "DELETE FROM employee WHERE id=?";
 
         List<String> queryParams = new ArrayList<>();
@@ -62,7 +64,8 @@ public class EmployeeDao {
         String query = "Select * FROM employee";
 
         try {
-            ResultSet resultSet = DBService.executeSelectQuery(databaseName, query);
+            PreparedStatement preparedStatement = DBService.connect(databaseName).prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Employee loadedEmployee = new Employee();
                 loadedEmployee.setId(resultSet.getInt("id"));

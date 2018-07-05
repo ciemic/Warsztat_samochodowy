@@ -56,8 +56,8 @@ public class CustomerDao {
         String query = "Select * FROM customer";
 
         try {
-
-            ResultSet resultSet = DBService.executeSelectQuery(databaseName, query);
+            PreparedStatement preparedStatement = DBService.connect(databaseName).prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Customer loadedCustomer = new Customer();
                 loadedCustomer.setId(resultSet.getInt("id"));

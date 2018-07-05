@@ -57,7 +57,8 @@ public class VehicleDao {
         List<Vehicle> vehicles = new ArrayList<>();
         String query = "SELECT * FROM vehicle";
 
-        ResultSet resultSet = DBService.executeSelectQuery(databaseName, query);
+        PreparedStatement preparedStatement = DBService.connect(databaseName).prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Vehicle loadedVehicle = new Vehicle();
             loadedVehicle.setId(resultSet.getInt("id"));

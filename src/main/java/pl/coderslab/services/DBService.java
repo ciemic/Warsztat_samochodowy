@@ -32,6 +32,17 @@ public class DBService {
         return rowCount;
     }
 
+    public static ResultSet executeSelectQuery(String database, String query) {
+        ResultSet result = null;
+        try (Connection conn = connect(database)) {
+            PreparedStatement prep = conn.prepareStatement(query);
+            result = prep.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
     public static ResultSet executeSelectQuery(String database, String query, List<String> params) {
         ResultSet result = null;
         try (Connection conn = connect(database)) {

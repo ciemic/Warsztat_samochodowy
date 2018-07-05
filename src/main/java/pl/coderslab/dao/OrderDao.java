@@ -69,7 +69,7 @@ public class OrderDao {
 
     static public List<Order> loadAllOrders() throws SQLException {
         List<Order> orders = new ArrayList<>();
-        String query = "SELECT * FROM `car_service`.`order`";
+        String query = "SELECT * FROM `car_service`.`order` ORDER BY acceptance DESC";
 
         PreparedStatement preparedStatement = DBService.connect(databaseName).prepareStatement(query);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -91,6 +91,32 @@ public class OrderDao {
         }
         return orders;
     }
+
+    static public List<Order> loadAllCurrentOrders() throws SQLException {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM `car_service`.`order` WHERE status_id<5 ORDER BY acceptance DESC";
+
+        PreparedStatement preparedStatement = DBService.connect(databaseName).prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Order loadedOrder = new Order();
+            loadedOrder.setId(resultSet.getInt("id"));
+            loadedOrder.setStatusId(resultSet.getInt("status_id"));
+            loadedOrder.setVehicleId(resultSet.getInt("vehicle_id"));
+            loadedOrder.setProblemDescription(resultSet.getString("problem_description"));
+            loadedOrder.setAcceptance(resultSet.getString("acceptance"));
+            loadedOrder.setPlannedMaintenance(resultSet.getString("planned_maintenance"));
+            loadedOrder.setMaintenanceStart(resultSet.getString("maintenance_start"));
+            loadedOrder.setEmployeeId(resultSet.getInt("employee_id"));
+            loadedOrder.setMaintenaceDescription(resultSet.getString("maintenance_description"));
+            loadedOrder.setTotalPrice(resultSet.getDouble("total_price"));
+            loadedOrder.setPartsCost(resultSet.getDouble("parts_cost"));
+            loadedOrder.setHoursAmount(resultSet.getInt("hours_amount"));
+            orders.add(loadedOrder);
+        }
+        return orders;
+    }
+
 
     static public Order loadOrderById(int id) {
         List<Order> orders = new ArrayList<>();

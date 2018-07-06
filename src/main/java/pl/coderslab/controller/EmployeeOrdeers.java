@@ -26,8 +26,8 @@ public class EmployeeOrdeers extends HttpServlet {
 
         List<Order> employeeOrderList = new ArrayList<>();
         try {
-            employeeId = Integer.parseInt(getInitParameter("id"));
-            actualOrders = Boolean.parseBoolean(getInitParameter("actual"));
+            employeeId = Integer.parseInt(request.getParameter("id"));
+            actualOrders = Boolean.parseBoolean(request.getParameter("actual"));
 
             Employee employee = EmployeeDao.loadEmployeeById(employeeId);
             if (!actualOrders)

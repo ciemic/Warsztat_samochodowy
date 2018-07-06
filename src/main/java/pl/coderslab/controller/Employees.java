@@ -20,7 +20,7 @@ public class Employees extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Employee> employees = EmployeeDao.loadAllEmployees();
-        request.setAttribute("employeeList", employees);
+        request.setAttribute("employees", employees);
 
         getServletContext().getRequestDispatcher("/WEB-INF/employees.jsp").forward(request, response);
     }

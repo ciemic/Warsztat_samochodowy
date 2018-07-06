@@ -1,12 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: michal
-  Date: 06.07.18
-  Time: 11:01
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <header>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -27,7 +20,7 @@
                 <a class="nav-link" href="/customers">Customers</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/Employees">employees</a>
+                <a class="nav-link" href="/employees">Employees</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="/raports" id="navbarDropdownMenuLink" data-toggle="dropdown"

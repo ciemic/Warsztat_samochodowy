@@ -15,6 +15,7 @@
 </head>
 <body>
 
+<c:import url="fragments/header.jsp"/>
 
 
 <!-- Optional JavaScript -->

@@ -15,7 +15,7 @@
 </head>
 <body>
 
-
+<c:import url="fragments/header.jsp"/>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

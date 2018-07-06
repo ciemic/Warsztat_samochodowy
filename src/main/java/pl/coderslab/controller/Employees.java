@@ -1,11 +1,15 @@
 package pl.coderslab.controller;
 
+import pl.coderslab.dao.EmployeeDao;
+import pl.coderslab.model.Employee;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "Employees", urlPatterns = "/employees")
 public class Employees extends HttpServlet {
@@ -14,6 +18,10 @@ public class Employees extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Employee> employees = EmployeeDao.loadAllEmployees();
+        request.setAttribute("employeeList", employees);
+
         getServletContext().getRequestDispatcher("/WEB-INF/employees.jsp").forward(request, response);
     }
 }

@@ -130,7 +130,7 @@ public class EmployeeDao {
             employee.setAddress(employeeEntryMap.get("address"));
             employee.setPhone(employeeEntryMap.get("phone"));
             employee.setNote(employeeEntryMap.get("note"));
-            employee.setHourly(Double.parseDouble(employeeEntryMap.get("phone")));
+            employee.setHourly(Double.parseDouble(employeeEntryMap.get("hourly")));
             employee.setEmail(employeeEntryMap.get("email"));
             employee.setBirthDate(employeeEntryMap.get("birth_date"));
         } catch (Exception e) {

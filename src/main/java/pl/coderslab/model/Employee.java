@@ -1,6 +1,5 @@
 package pl.coderslab.model;
 
-import java.math.BigDecimal;
 
 public class Employee extends Person {
     private double hourly;
@@ -16,8 +15,8 @@ public class Employee extends Person {
     }
 
 
-    public double getHourly() {
-        return hourly;
+    public String getHourly() {
+        return String.valueOf(hourly);
     }
 
     public void setHourly(double hourly) {
@@ -37,9 +36,9 @@ public class Employee extends Person {
 
         return
                 super.toString() +
-                "Employee{" +
-                "hourly=" + hourly +
-                ", note='" + note + '\'' +
-                '}';
+                        "Employee{" +
+                        "hourly=" + hourly +
+                        ", note='" + note + '\'' +
+                        '}';
     }
 }

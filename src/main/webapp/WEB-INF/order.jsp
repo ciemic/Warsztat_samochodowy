@@ -26,7 +26,7 @@
 
 <div class="card" style="margin-left: 5%; margin-right: 5%">
     <div class="card-header">
-        Order #Id ${order.id}
+        Order #Id ${order.id} <a href="/editOrder?id=${order.id}" style="float: right;" class="btn btn-primary">Edit order</a>
     </div>
     <div class="card-body">
         <h5 class="card-title">Order details</h5>

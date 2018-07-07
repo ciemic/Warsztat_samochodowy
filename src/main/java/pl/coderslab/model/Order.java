@@ -113,4 +113,21 @@ public class Order {
     public Order() {
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", statusId=" + statusId +
+                ", vehicleId=" + vehicleId +
+                ", problemDescription='" + problemDescription + '\'' +
+                ", acceptance='" + acceptance + '\'' +
+                ", plannedMaintenance='" + plannedMaintenance + '\'' +
+                ", maintenanceStart='" + maintenanceStart + '\'' +
+                ", employeeId=" + employeeId +
+                ", maintenaceDescription='" + maintenaceDescription + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", partsCost=" + partsCost +
+                ", hoursAmount=" + hoursAmount +
+                '}';
+    }
 }

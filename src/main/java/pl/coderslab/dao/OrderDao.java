@@ -14,7 +14,7 @@ public class OrderDao {
 
     private static String databaseName = "car_service";
 
-    private static void addOrder(Order order) {
+    public static void addOrder(Order order) {
 
         String query = "INSERT INTO `car_service`.`order` (`status_id`, `vehicle_id`, `problem_description`, `acceptance`," +
                 " `planned_maintenance`, `maintenance_start`, `employee_id`, `maintenance_description`, `total_price`," +
@@ -36,7 +36,7 @@ public class OrderDao {
 
     }
 
-    private static void updateOrder(Order order) {
+    public static void updateOrder(Order order) {
         String query = "Update `car_service`.`order` SET `status_id`=?, `vehicle_id`=?, `problem_description`=?, `acceptance`=?," +
                 "`planned_maintenance`=?, `maintenance_start`=?, `employee_id`=?, `maintenance_description`=?, `total_price`=?," +
                 "`parts_cost`=?, `hours_amount`=? Where id = ?";

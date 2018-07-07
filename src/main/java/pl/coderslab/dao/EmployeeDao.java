@@ -13,7 +13,18 @@ public class EmployeeDao {
     public static void main(String[] args) {
         List<Employee> employees = loadAllEmployees();
         System.out.println(employees);
+        System.out.println();
+        List<Order> employeeOrderList = new ArrayList<>();
+        Employee employee = EmployeeDao.loadEmployeeById(1);
+        employeeOrderList = EmployeeDao.loadEmployeeOrders(employee);
+        System.out.println(employeeOrderList);
+        System.out.println();
+
+        List<Order> employeeInProgressOrderList = EmployeeDao.loadEmployeeOrdersInProgress(employee);
+        System.out.println(employeeInProgressOrderList);
+
     }
+
     private static String databaseName = "car_service";
 
     public static void addEmployee(Employee employee) {

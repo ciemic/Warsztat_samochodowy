@@ -48,8 +48,6 @@
     </tbody>
 </table>
 
-<h3 style="margin-left: 5%">Add new order</h3>
-
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

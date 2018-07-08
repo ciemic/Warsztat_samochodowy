@@ -26,7 +26,7 @@
 
 <div class="card" style="margin-left: 5%; margin-right: 5%">
     <div class="card-header">
-        Order #Id ${order.id}
+        Order #Id ${order.id} <a href="/editOrder?id=${order.id}" style="float: right;" class="btn btn-primary">Edit order</a>
     </div>
     <div class="card-body">
         <h5 class="card-title">Order details</h5>
@@ -50,11 +50,11 @@
             <tr><td style="width: 30%">Order acceptance:</td><td style="width: 70%">${order.acceptance}</td></tr>
             <tr><td style="width: 30%">Planned maintenance:</td><td style="width: 70%">${order.plannedMaintenance}</td></tr>
             <tr><td style="width: 30%">Maintenance start date:</td><td style="width: 70%">${order.maintenanceStart}</td></tr>
-            <tr><td style="width: 30%">Employee</td><td style="width: 70%">#Id ${employee.id} - ${employee.name} ${employee.surname}   <a href="/employee?id=${employee.id}" class="btn btn-secondary btn-sm">Details</a></td></tr>
+            <tr><td style="width: 30%">Employee:</td><td style="width: 70%">#Id ${employee.id} - ${employee.name} ${employee.surname}   <a href="/employee?id=${employee.id}" class="btn btn-secondary btn-sm">Details</a></td></tr>
             <tr><td style="width: 30%">Maintenance description:</td><td style="width: 70%">${order.maintenaceDescription}</td></tr>
             <tr><td style="width: 30%">Total price:</td><td style="width: 70%">${order.totalPrice}</td></tr>
-            <tr><td style="width: 30%">Parts cost</td><td style="width: 70%">${order.partsCost}</td></tr>
-            <tr><td style="width: 30%">Maintenance time</td><td style="width: 70%">${order.hoursAmount}</td></tr>
+            <tr><td style="width: 30%">Parts cost:</td><td style="width: 70%">${order.partsCost}</td></tr>
+            <tr><td style="width: 30%">Maintenance time:</td><td style="width: 70%">${order.hoursAmount}</td></tr>
             </tbody>
         </table>
 

@@ -11,19 +11,7 @@
 
 <c:import url="fragments/header.jsp"/>
 
-<div>
-    <h2>Insert new Customer</h2>
-    <form method="post" action="#">
-        <input type="text" placeholder="name" name="name"/>
-        <input type="text" placeholder="surname" name="surname"/>
-        <input type="text" placeholder="address" name="address"/>
-        <input type="text" placeholder="phone" name="phone"/>
-        <input type="text" placeholder="email" name="email"/>
-        <input type="date" placeholder="birthDate" name="birthDate"/>
 
-        <input type="submit" value="ADD">
-    </form>
-</div>
 
 <br>
 <h3 style="margin-left: 5%">Active orders</h3>

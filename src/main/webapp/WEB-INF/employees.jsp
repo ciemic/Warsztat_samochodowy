@@ -39,6 +39,20 @@
     </c:forEach>
     </tbody>
 </table>
+<br>
+<h2>Insert new Employee</h2>
+<form method="post" action="#">
+    <input type="text" placeholder="name" name="name"/>
+    <input type="text" placeholder="surname" name="surname"/>
+    <input type="text" placeholder="address" name="address"/>
+    <input type="text" placeholder="phone" name="phone"/>
+    <input type="text" placeholder="email" name="email"/>
+    <input type="date" placeholder="birthDate" name="birthDate"/>
+    <input type="text" placeholder="hourly" name="hourly"/>
+    <input type="text" placeholder="note" name="note"/>
+
+    <input type="submit">
+</form>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -16,15 +16,14 @@ public class OrderDao {
 
     public static void addOrder(Order order) {
 
-        String query = "INSERT INTO `car_service`.`order` (`status_id`, `vehicle_id`, `problem_description`, `acceptance`," +
+        String query = "INSERT INTO `car_service`.`order` (`status_id`, `vehicle_id`, `problem_description`," +
                 " `planned_maintenance`, `maintenance_start`, `employee_id`, `maintenance_description`, `total_price`," +
-                " `parts_cost`, `hours_amount`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                " `parts_cost`, `hours_amount`) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         List<String> queryParams = new ArrayList<>();
         queryParams.add(String.valueOf(order.getStatusId()));
         queryParams.add(String.valueOf(order.getVehicleId()));
         queryParams.add(order.getProblemDescription());
-        queryParams.add(order.getAcceptance());
         queryParams.add(order.getPlannedMaintenance());
         queryParams.add(order.getMaintenanceStart());
         queryParams.add(String.valueOf(order.getEmployeeId()));

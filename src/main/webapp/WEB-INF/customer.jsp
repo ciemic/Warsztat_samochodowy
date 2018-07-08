@@ -28,6 +28,29 @@
             </tbody>
         </table>
 
+        <h3 style="margin-left: 5%">Vehicles</h3>
+        <table class="table table-hover" style="width: 90%; margin-right: 5%; margin-left: 5%">
+            <thead>
+            <tr>
+                <th scope="col" style="width: 5%">#Id</th>
+                <th scope="col" style="width: 25%">Vehicle Brand</th>
+                <th scope="col" style="width: 25%">Vehicle Model</th>
+                <th scope="col" style="width: 25%">Vehicle Registration Number</th>
+                <th scope="col" style="width: 20%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="vehicle" items="${vehicles}">
+                <tr>
+                    <th scope="row" style="width: 5%">${vehicle.id}</th>
+                    <td style="width: 25%">${vehicle.brand}</td>
+                    <td style="width: 25%">${vehicle.model}</td>
+                    <td style="width: 25%">${vehicle.registrationNumber}</td>
+                    <td style="width: 20%"><a href="/vehicle?id=${vehicle.id}" class="btn btn-primary">Select</a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
 
         </p>
         <button onclick="goBack()" class="btn btn-primary">Previous page</button>

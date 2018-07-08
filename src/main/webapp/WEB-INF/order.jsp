@@ -4,7 +4,7 @@
 <head>
     <c:import url="fragments/front.jsp"/>
 
-    <title>Title</title>
+    <title>Car service - order details</title>
 </head>
 <body>
 

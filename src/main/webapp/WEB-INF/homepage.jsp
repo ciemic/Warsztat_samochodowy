@@ -6,7 +6,7 @@
     <c:import url="fragments/front.jsp"/>
 
 
-    <title>Title</title>
+    <title>Car service - home</title>
 </head>
 <body>
 
@@ -14,27 +14,38 @@
 
 <br>
 <h3 style="margin-left: 5%">Current orders</h3>
-<c:forEach var="map" items="${requestScope.ordersMap}">
-    <table class="table table-hover" style="width: 90%; margin-right: 5%; margin-left: 5%">
-        <thead>
-        <tr>
-            <th scope="col" style="width: 10%">#Id ${map.key.id}</th>
-            <th scope="col" colspan="2" style="width: 90%">${map.key.name} ${map.key.surname}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="order" items="${map.value}">
-            <tr>
-                <th scope="row" style="width: 10%">${order.id}</th>
-                <td style="width: 80%">${order.problemDescription}</td>
-                <td style="width: 10%"><a href="/order?id=${order.id}" class="btn btn-primary">Details</a></td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</c:forEach>
+
+<table  class="table table-hover" style="width: 90%; margin-right: 5%; margin-left: 5%">
+    <thead>
+    <tr>
+        <th data-sortable="true" scope="col" style="width: 10%">#Id</th>
+        <th scope="col" colspan="2" style="width: 90%">name</th>
+    </tr>
+    </thead>
+    <c:forEach var="map" items="${requestScope.ordersMap}">
+    <tbody>
+    <tr>
+        <td> ${map.key.id}</td>
+        <td> ${map.key.name} ${map.key.surname} <br>
 
 
+            <table class="table table-hover" style="width: 90%; margin-right: 5%; margin-left: 5%">
+                <tbody>
+                <c:forEach var="order" items="${map.value}">
+
+                    <tr>
+                        <th scope="row" style="width: 10%">${order.id}</th>
+                        <td style="width: 80%">${order.problemDescription}</td>
+                        <td style="width: 10%"><a href="/order?id=${order.id}" class="btn btn-primary">Details</a></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            </c:forEach>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 
 <c:import url="fragments/footer.jsp"/>

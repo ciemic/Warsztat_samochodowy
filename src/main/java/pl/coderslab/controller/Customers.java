@@ -14,23 +14,7 @@ import java.util.List;
 @WebServlet(name = "Customers", urlPatterns = "/customers")
 public class Customers extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Customer newCustomer = new Customer();
 
-        try {
-            newCustomer.setId(0);
-            newCustomer.setName(request.getParameter("name"));
-            newCustomer.setSurname(request.getParameter("surname"));
-            newCustomer.setBirthDate(request.getParameter("birthDate"));
-            newCustomer.setAddress(request.getParameter("address"));
-            newCustomer.setPhone(request.getParameter("phone"));
-            newCustomer.setEmail(request.getParameter("email"));
-
-
-            CustomerDao.addCustomer(newCustomer);
-        } catch (Exception e) {
-        }
-
-        this.doGet(request, response);
     }
 
 

@@ -18,7 +18,7 @@ public class VehicleDao {
 
     private static String databaseName = "car_service";
 
-    private static void addVehicle(Vehicle vehicle) {
+    public static void addVehicle(Vehicle vehicle) {
 
         String query = "Insert into vehicle Values (?,?,?,?,?,?,?)";
 
@@ -34,7 +34,7 @@ public class VehicleDao {
 
     }
 
-    private static void updateVehicle(Vehicle vehicle) {
+    public static void updateVehicle(Vehicle vehicle) {
         String query = "Update vehicle set brand = ?, model = ?, production_year = ?, registration_number = ?, next_service = ?" +
                 ", customer_id = ? Where id = ?";
 

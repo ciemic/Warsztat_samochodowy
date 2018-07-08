@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date"/>
 <html>
 <head>
     <!-- Required meta tags -->
@@ -9,26 +11,23 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <title>Car service - edit order</title>
+    <title>Car service - Add new order</title>
 </head>
 <body>
 <c:import url="fragments/header.jsp"/>
 <br>
 <div class="card" style="margin-left: 5%; margin-right: 5%">
     <div class="card-header">
-        Order #Id ${order.id} - Edit </a>
+        Add new order </a>
     </div>
     <div class="card-body">
         <h5 class="card-title">Order details</h5>
         <p class="card-text">
-        <form action="/editOrder" method="post">
-            <input type="hidden" id="orderId" name="orderId" value="${order.id}">
-            <input type="hidden" id="vehicleId" name="vehicleId" value="${vehicle.id}">
-            <input type="hidden" id="acceptance" name="acceptance" value="${order.acceptance}">
+        <form action="/addOrder" method="post">
             <div class="form-group row">
                 <label for="statusId" class="col-2 col-form-label">Status #Id:</label>
                 <div class="col-10">
-                    <input class="form-control" type="number" min="1" max="6" value="${order.statusId}" id="statusId"
+                    <input class="form-control" type="number" min="1" max="6" value="1" id="statusId"
                            name="statusId">
                     <small id="statusIdHelp" class="form-text text-muted">1 - In service | 2 - Accepted costs | 3 -
                         Maintenance activities in progress | 4 - Ready for
@@ -37,24 +36,28 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="vehicle" class="col-2 col-form-label">Vehicle:</label>
+                <label for="vehicleId" class="col-2 col-form-label">Vehicle:</label>
                 <div class="col-10">
-                    <input class="form-control" type="text"
-                           value="#Id ${vehicle.id} - ${vehicle.brand} ${vehicle.model}" id="vehicle" name="vehicleId"
-                           disabled>
+                    <select class="form-control" id="vehicleId" name="vehicleId">
+                        <c:forEach items="${vehicles}" var="vehicle">
+                            <option value="${vehicle.id}">#Id ${vehicle.id} - ${vehicle.brand} ${vehicle.model}"
+                                - ${vehicle.registrationNumber}</option>
+                        </c:forEach>
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="problemDescription" class="col-2 col-form-label">Problem description:</label>
                 <div class="col-10">
                     <textarea class="form-control" type="text"
-                              id="problemDescription" name="problemDescription">${order.problemDescription}</textarea>
+                              id="problemDescription" name="problemDescription"
+                              placeholder="problem description"></textarea>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="orderAcceptance" class="col-2 col-form-label">Order acceptance:</label>
                 <div class="col-10">
-                    <input class="form-control" type="text" value="${order.acceptance}" id="orderAcceptance"
+                    <input class="form-control" type="text" value="${now}" id="orderAcceptance"
                            name="orderAcceptance" disabled>
                 </div>
             </div>
@@ -62,74 +65,51 @@
                 <label for="plannedMaintenance" class="col-2 col-form-label">Planned maintenance:</label>
                 <div class="col-10">
                     <input class="form-control" type="datetime-local" placeholder="YYYY/MM/DD 00:00:00"
-                           value="${order.plannedMaintenance}" id="plannedMaintenance" name="plannedMaintenance">
+                           id="plannedMaintenance" name="plannedMaintenance">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="maintenanceStart" class="col-2 col-form-label">Maintenance start date:</label>
                 <div class="col-10">
                     <input class="form-control" type="datetime-local" placeholder="YYYY/MM/DD 00:00:00"
-                           value="${order.maintenanceStart}" id="maintenanceStart" name="maintenanceStart">
+                           id="maintenanceStart" name="maintenanceStart">
                 </div>
             </div>
-
-
             <div class="form-group row">
-                <label for="employeeId" class="col-2 col-form-label">Employee select:</label>
-                <div class="form-group">
-
-                    <div class="form-check">
-                        <c:forEach var="employees" items="${employees}">
-                            <c:if test="${employees.id != employee.id}">
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="employeeId">
-                                        <input class="form-check-input" type="radio" id="employeeId" name="employeeId"
-                                               value="${employees.id}">
-                                        #Id ${employees.id}
-                                        - ${employees.name} ${employees.surname}
-                                    </label>
-                                </div>
-                            </c:if>
-                            <c:if test="${employees.id == employee.id}">
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label" for="employeeId">
-                                        <input class="form-check-input" type="radio" id="employeeId" name="employeeId"
-                                               value="${employees.id}" checked>
-                                        #Id ${employees.id}
-                                        - ${employees.name} ${employees.surname}
-                                    </label>
-                                </div>
-                            </c:if>
+                <label for="employeeId" class="col-2 col-form-label">Employee:</label>
+                <div class="col-10">
+                    <select class="form-control" id="employeeId" name="employeeId">
+                        <c:forEach items="${employees}" var="employee">
+                            <option value="${employee.id}">#Id ${employee.id} - ${employee.name} ${employee.surname}"</option>
                         </c:forEach>
-                    </div>
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="maintenaceDescription" class="col-2 col-form-label">Maintenance description:</label>
                 <div class="col-10">
-                    <textarea class="form-control" type="text"
-                              id="maintenaceDescription"
-                              name="maintenaceDescription">${order.maintenaceDescription}</textarea>
+                    <textarea class="form-control" type="text" id="maintenaceDescription"
+                              name="maintenaceDescription" placeholder="maintenance description"></textarea>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="totalPrice" class="col-2 col-form-label">Total price:</label>
                 <div class="col-10">
-                    <input class="form-control" type="number" step="0.01" min="0.01" value="${order.totalPrice}"
+                    <input class="form-control" type="number" step="0.01" min="0.01" placeholder="total price"
                            id="totalPrice" name="totalPrice">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="partsCost" class="col-2 col-form-label">Parts cost:</label>
                 <div class="col-10">
-                    <input class="form-control" type="number" step="0.01" min="0.01" value="${order.partsCost}"
+                    <input class="form-control" type="number" step="0.01" min="0.01" placeholder="parts cost"
                            id="partsCost" name="partsCost">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="hoursAmount" class="col-2 col-form-label">Maintenance time:</label>
                 <div class="col-10">
-                    <input class="form-control" type="number" min="1" value="${order.hoursAmount}"
+                    <input class="form-control" type="number" min="1" placeholder="maintenance time"
                            id="hoursAmount" name="hoursAmount">
                 </div>
             </div>

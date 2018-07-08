@@ -18,7 +18,7 @@
 <c:import url="fragments/header.jsp"/>
 
 <br>
-<h3 style="margin-left: 5%">Active orders</h3>
+<h3 style="margin-left: 5%">Current orders</h3>
 <table class="table table-hover" style="width: 90%; margin-right: 5%; margin-left: 5%">
     <thead>
     <tr>

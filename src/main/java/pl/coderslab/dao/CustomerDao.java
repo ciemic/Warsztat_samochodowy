@@ -39,6 +39,7 @@ public class CustomerDao {
         queryParams.add(customer.getPhone());
         queryParams.add(customer.getEmail());
         queryParams.add(customer.getBirthDate());
+        queryParams.add(String.valueOf(customer.getId()));
 
         DBService.executeUpdate(databaseName, query, queryParams);
     }

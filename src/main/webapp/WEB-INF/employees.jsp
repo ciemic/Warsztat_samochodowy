@@ -11,7 +11,7 @@
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 
-    <title>Title</title>
+    <title>Car service - employee list</title>
 </head>
 <body>
 

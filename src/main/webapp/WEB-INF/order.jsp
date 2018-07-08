@@ -16,7 +16,7 @@
         }
     </script>
 
-    <title>Title</title>
+    <title>Car service - order details</title>
 </head>
 <body>
 

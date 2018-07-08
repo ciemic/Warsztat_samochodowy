@@ -11,14 +11,14 @@
 
 <div class="card" style="margin-left: 5%; margin-right: 5%">
     <div class="card-header">
-        Employee #Id ${employee.id}
+        Employee #Id ${employee.id}<a href="/employeeedit?id=${employee.id}" style="float: right;" class="btn btn-primary">Edit</a>
     </div>
     <div class="card-body">
         <h5 class="card-title">Employee details</h5>
         <p class="card-text">
         <table class="table" style="width: 90%; margin-right: 5%; margin-left: 5%">
             <tbody>
-            <td style="width: 10%"><a href="/employeeedit?id=${employee.id}" class="btn btn-primary">Edit</a>
+
             <tr><td style="width: 30%">Name:</td><td style="width: 70%"> ${employee.name}</td></tr>
             <tr><td style="width: 30%">Surname:</td><td style="width: 70%">${employee.surname}</td></tr>
             <tr><td style="width: 30%">Address:</td><td style="width: 70%">${employee.address}</td></tr>

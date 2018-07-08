@@ -24,8 +24,15 @@
                     <a class="dropdown-item" href="/ordersHistory">Orders history</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/customers">Customers</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/customers" id="navbarDropdownCustomersLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Customers
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownVehiclesLink">
+                    <a class="dropdown-item" href="/customers">Customer list</a>
+                    <a class="dropdown-item" href="/customerAdd">Add customer</a>
+                </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="/vehicles" id="navbarDropdownVehiclesLink" data-toggle="dropdown"
@@ -37,8 +44,15 @@
                     <a class="dropdown-item" href="/addVehicle">Add vehicle</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/employees">Employees</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/employees" id="navbarDropdownEmployeesLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Employees
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownVehiclesLink">
+                    <a class="dropdown-item" href="/employees">Employee list</a>
+                    <a class="dropdown-item" href="/employeeAdd">Add Employee</a>
+                </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="/raports" id="navbarDropdownMenuLink" data-toggle="dropdown"

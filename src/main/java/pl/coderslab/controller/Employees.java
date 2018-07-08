@@ -15,25 +15,7 @@ import java.util.List;
 public class Employees extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Employee newEmployee = new Employee();
 
-        try {
-            newEmployee.setId(0);
-            newEmployee.setName(request.getParameter("name"));
-            newEmployee.setSurname(request.getParameter("surname"));
-            newEmployee.setBirthDate(request.getParameter("birthDate"));
-            newEmployee.setAddress(request.getParameter("address"));
-            newEmployee.setPhone(request.getParameter("phone"));
-            newEmployee.setEmail(request.getParameter("email"));
-            newEmployee.setHourly(Double.parseDouble(request.getParameter("hourly")));
-            newEmployee.setNote(request.getParameter("note"));
-
-
-            EmployeeDao.addEmployee(newEmployee);
-        } catch (Exception e) {
-        }
-
-        this.doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

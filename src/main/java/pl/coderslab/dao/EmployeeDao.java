@@ -58,6 +58,7 @@ public class EmployeeDao {
         queryParams.add(String.valueOf(employee.getHourly()));
         queryParams.add(employee.getEmail());
         queryParams.add(employee.getBirthDate());
+        queryParams.add(String.valueOf(employee.getId()));
 
         DBService.executeUpdate(databaseName, query, queryParams);
     }

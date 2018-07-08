@@ -27,6 +27,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="/customers">Customers</a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/vehicles" id="navbarDropdownVehiclesLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Vehicles
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownVehiclesLink">
+                    <a class="dropdown-item" href="/vehicles">Vehicle list</a>
+                    <a class="dropdown-item" href="/addVehicle">Add vehicle</a>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/employees">Employees</a>
             </li>

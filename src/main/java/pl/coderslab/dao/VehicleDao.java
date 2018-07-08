@@ -78,6 +78,21 @@ public class VehicleDao {
         return vehicles;
     }
 
+    static public List<Vehicle> loadAllCustomerVehicles(int customerId) {
+        String query = "SELECT * FROM vehicle WHERE customer_id = ?";
+
+        List<Vehicle> vehicles = new ArrayList<>();
+        List<String> param = new ArrayList<>();
+        param.add(String.valueOf(customerId));
+        List<Map<String, String>> mapList = DBService.executeMultipleSelect(databaseName, query, param);
+
+        for (Map<String, String> map : mapList) {
+            vehicles.add(getVehicle(map));
+        }
+
+        return vehicles;
+    }
+
     static public Vehicle loadVehicleById(int id) {
         String query = "SELECT * FROM vehicle WHERE id = ?";
 
@@ -93,6 +108,8 @@ public class VehicleDao {
 
         return vehicle;
     }
+
+
 
     protected static Vehicle getVehicle(Map<String, String> vehicleEntry) {
         Vehicle vehicle = new Vehicle();

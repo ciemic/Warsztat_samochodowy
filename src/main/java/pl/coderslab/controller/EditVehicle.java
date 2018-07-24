@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "editVehicle", urlPatterns = "/editVehicle")
-public class editVehicle extends HttpServlet {
+public class EditVehicle extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Vehicle vehicle = new Vehicle();
 

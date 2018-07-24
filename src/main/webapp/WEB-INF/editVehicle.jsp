@@ -26,6 +26,8 @@
             <input type="hidden" id="brand" name="brand" value="${vehicle.brand}">
             <input type="hidden" id="model" name="model" value="${vehicle.model}">
             <input type="hidden" id="productionYear" name="productionYear" value="${vehicle.productionYear}">
+            <input type="hidden" id="registrationNumber" name="registrationNumber"
+                   value="${vehicle.registrationNumber}">
             <div class="form-group row">
                 <label for="br" class="col-2 col-form-label">Brand:</label>
                 <div class="col-10">
